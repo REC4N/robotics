@@ -1,6 +1,6 @@
 from setuptools import setup
 
-package_name = 'navigation'
+package_name = 'motor_control'
 
 setup(
     name=package_name,
@@ -20,9 +20,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'navigation = navigation.navigation:main',
-            'navigation_v2 = navigation.navigation_v2:main',
-            'test_arduino = navigation.test_nav:main',
         ],
     },
 )

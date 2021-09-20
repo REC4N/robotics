@@ -22,7 +22,7 @@ class MovementPublisher(Node):
         # Create node
         super().__init__('movement_publisher')
         # Create publisher node
-        self.publisher_ = self.create_publisher(Twist, 'motor_control', 10)
+        self.publisher_ = self.create_publisher(Twist, 'target_vel', 10)
         # Send messages every 10 Hz
         timer_period = 0.1  # seconds 
         self.timer = self.create_timer(timer_period, self.timer_callback)
@@ -48,7 +48,7 @@ class MovementSubscriber(Node):
         # Create subscriber node to a 'motor_feedback' topic and expects a Twist message.
         self.subscription = self.create_subscription(
             Twist,
-            'motor_feedback',
+            'platform_vel',
             self.listener_callback,
             10)
         self.subscription  # prevent unused variable warning
@@ -96,6 +96,8 @@ def main(args=None):
         try:
             # Run all nodes on main thread.
             executor.spin()
+        except KeyboardInterrupt:
+            pass
         finally:
             # Clean nodes when program is finished.
             executor.shutdown()
@@ -104,7 +106,7 @@ def main(args=None):
             keyboard_sub.destroy_node()
     finally:
         rclpy.shutdown()
-
+        print("Program closed successfully.")
 
 if __name__ == '__main__':
     main()
