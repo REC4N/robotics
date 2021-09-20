@@ -37,7 +37,7 @@ class TestSubscriber(Node):
         self.subscription  # prevent unused variable warning
 
     def listener_callback(self, msg):
-        self.get_logger().info('I heard from MotorControl: (Linear: "%.2f", Angular: "%.2f")' % (msg.linear.x, msg.linear.z))
+        self.get_logger().info('I heard from MotorControl: (Linear: "%.2f", Angular: "%.2f")' % (msg.linear.x, msg.angular.z))
 
 
 def main(args=None):
